@@ -16,5 +16,11 @@ export const projectList: Project[] = [
       name: 'Rating Component',
       url: '/rating',
       description: 'Amazon like rating UI'
+   },
+   {
+      id: '3',
+      name: 'Directory VSCode Component',
+      url: '/directory',
+      description: 'Nested file structure'
    }
 ]
