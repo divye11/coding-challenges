@@ -1,5 +1,5 @@
 import { projectList } from "../../utils/constants";
-import ProjectCard from './components/Common/ProjectCard';
+import ProjectCard from './archive/components/Common/ProjectCard';
 
 export default function Home() {
   return (

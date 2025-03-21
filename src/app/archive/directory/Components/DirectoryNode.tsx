@@ -4,6 +4,9 @@ import { JSX, useState } from "react";
 import cn from 'classnames';
 import { Directory } from "../utils/constants";
 import { ChevronRightIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
+import { useRouter } from 'next/navigation'
+import qs from 'qs';
+
 
 
 const Icon = ({ isOpen, isParent }: { isOpen: boolean, isParent: boolean }): JSX.Element => {
@@ -15,16 +18,23 @@ const Icon = ({ isOpen, isParent }: { isOpen: boolean, isParent: boolean }): JSX
 }
 
 const Node = ({ node }: {node: Directory }) => {
+   const router = useRouter();
    const [isOpen, setIsOpen] = useState<boolean>(false);
 
-   const handleClick = () => {
+   const handleClick = (e: React.SyntheticEvent) => {
+      const { url } = node;
+      if (url) {
+         const params = qs.stringify({ url }, { addQueryPrefix: true });
+         const modifiedUrl = `http://localhost:3000/directory${params}`;
+         router.push(modifiedUrl);
+      }
       setIsOpen((prevOpen) => !prevOpen)
    }
    const isParent = node?.children && node.children.length > 0 || false;
 
    return (
       <li className="pl-3">
-         <div 
+         <div
             className={cn("flex flex-row mt-2 items-center cursor-pointer", {
                'underline': node?.url
             })} 
